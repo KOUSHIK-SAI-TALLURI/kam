@@ -1,0 +1,3027 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Snapdeal | Virtual KAM</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        :root {
+            color-scheme: dark;
+            --background: #0b1020;
+            --surface: #121a2b;
+            --surface-dark: #0e1525;
+            --border: #263149;
+            --text: #edf1fa;
+            --muted: #8e9ab2;
+            --accent: #ff7557;
+            --green: #38d996;
+            --red: #ff7777;
+            --blue: #78b9ff;
+            --yellow: #f4bd55;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            background: var(--background);
+            color: var(--text);
+            font-family: Inter, Segoe UI, Arial, sans-serif;
+        }
+
+        button {
+            font-family: inherit;
+        }
+
+        .container {
+            width: min(1240px, 94%);
+            margin: auto;
+            padding: 28px 0 45px;
+        }
+
+        /* HEADER */
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 35px;
+        }
+
+        .brand {
+            font-size: 22px;
+            font-weight: 800;
+            letter-spacing: -0.7px;
+        }
+
+        .brand-main {
+            color: var(--accent);
+        }
+
+        .brand-sub {
+            color: #a9b6cc;
+            font-size: 13px;
+            font-weight: 400;
+            margin-left: 7px;
+        }
+
+        .status {
+            display: flex;
+            align-items: center;
+            gap: 9px;
+            color: #b3bfd2;
+            font-size: 12px;
+            background: #171f33;
+            border: 1px solid var(--border);
+            border-radius: 30px;
+            padding: 10px 15px;
+        }
+
+        .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #77849d;
+        }
+
+        .dot.live {
+            background: var(--green);
+            box-shadow: 0 0 10px var(--green);
+        }
+
+        .dot.warning {
+            background: var(--yellow);
+            box-shadow: 0 0 8px var(--yellow);
+        }
+
+        /* PAGE INTRO */
+
+        .eyebrow {
+            color: var(--muted);
+            font-size: 11px;
+            letter-spacing: 1.8px;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+
+        h1 {
+            font-size: clamp(26px, 4vw, 36px);
+            margin: 0 0 9px;
+            letter-spacing: -1px;
+        }
+
+        .subtitle {
+            color: #929eb4;
+            font-size: 14px;
+            line-height: 1.7;
+            margin: 0 0 27px;
+        }
+
+        /* MAIN LAYOUT */
+
+        .layout {
+            display: grid;
+            grid-template-columns: 1.4fr 0.95fr;
+            gap: 19px;
+            align-items: start;
+        }
+
+        .card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 17px;
+            padding: 22px;
+            min-width: 0;
+        }
+
+        .card h2 {
+            font-size: 16px;
+            margin: 0 0 18px;
+            font-weight: 700;
+        }
+
+        .right-panel {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .panel-section {
+            min-width: 0;
+        }
+
+        /* SELLER PROFILE */
+
+        .seller {
+            display: flex;
+            align-items: center;
+            gap: 13px;
+            margin-bottom: 22px;
+        }
+
+        .avatar {
+            width: 47px;
+            height: 47px;
+            border-radius: 14px;
+            background: #263957;
+            display: grid;
+            place-items: center;
+            font-size: 20px;
+            font-weight: 700;
+            color: #c3d6ff;
+            flex-shrink: 0;
+        }
+
+        .seller-name {
+            font-weight: 700;
+            margin-bottom: 5px;
+            font-size: 15px;
+        }
+
+        .seller-detail {
+            color: var(--muted);
+            font-size: 12px;
+        }
+
+        /* CALL INTERFACE */
+
+        .call-box {
+            min-height: 205px;
+            background: linear-gradient(145deg, #172641, #171d35);
+            border: 1px solid #324365;
+            border-radius: 15px;
+            padding: 23px 18px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .call-icon {
+            width: 61px;
+            height: 61px;
+            border-radius: 50%;
+            background: #203b55;
+            display: grid;
+            place-items: center;
+            font-size: 27px;
+            margin-bottom: 14px;
+        }
+
+        .call-title {
+            font-weight: 700;
+            margin-bottom: 7px;
+            font-size: 16px;
+        }
+
+        .call-description {
+            color: #9ba9c0;
+            font-size: 12px;
+            line-height: 1.5;
+            max-width: 400px;
+        }
+
+        .controls {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 21px;
+            flex-wrap: wrap;
+        }
+
+        button {
+            border: 0;
+            border-radius: 10px;
+            padding: 12px 21px;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 700;
+            transition: background 0.2s, opacity 0.2s;
+        }
+
+        button:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+
+        .start {
+            background: var(--accent);
+            color: white;
+        }
+
+        .start:hover:not(:disabled) {
+            background: #ff8b72;
+        }
+
+        .stop {
+            background: #29354c;
+            color: #e8edf7;
+        }
+
+        .stop:hover:not(:disabled) {
+            background: #394963;
+        }
+
+        /* TRANSCRIPT */
+
+        .transcript {
+            margin-top: 24px;
+        }
+
+        .transcript-window {
+            min-height: 200px;
+            max-height: 400px;
+            overflow-y: auto;
+            background: var(--surface-dark);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 16px;
+            scroll-behavior: smooth;
+        }
+
+        .empty {
+            color: #77859e;
+            font-size: 13px;
+            text-align: center;
+            padding: 60px 10px;
+        }
+
+        .message {
+            margin-bottom: 17px;
+            line-height: 1.6;
+            font-size: 13px;
+        }
+
+        .message:last-child {
+            margin-bottom: 0;
+        }
+
+        .message-label {
+            color: #ff997f;
+            font-size: 11px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            margin-bottom: 5px;
+        }
+
+        .message.user .message-label {
+            color: var(--blue);
+        }
+
+        .message-text {
+            color: #d8e0ef;
+            white-space: pre-wrap;
+            overflow-wrap: anywhere;
+        }
+
+        /* KPI CARDS */
+
+        .metrics {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .metric {
+            background: var(--surface-dark);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 15px 13px;
+            min-width: 0;
+        }
+
+        .metric-label {
+            color: var(--muted);
+            font-size: 11px;
+            margin-bottom: 10px;
+        }
+
+        .metric-value {
+            font-size: clamp(15px, 2vw, 19px);
+            font-weight: 750;
+            overflow-wrap: anywhere;
+            line-height: 1.35;
+        }
+
+        .metric-note {
+            color: #929eb4;
+            font-size: 10px;
+            line-height: 1.5;
+            margin-top: 6px;
+        }
+
+        .metric-note.negative {
+            color: var(--red);
+        }
+
+        .metric-note.positive {
+            color: var(--green);
+        }
+
+        .metric-note.neutral {
+            color: #929eb4;
+        }
+
+        /* DETAIL AND ACTIVITY CARDS */
+
+        .details-list,
+        .activity-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .detail-item,
+        .activity {
+            background: var(--surface-dark);
+            border: 1px solid var(--border);
+            border-radius: 11px;
+            padding: 13px;
+            min-width: 0;
+        }
+
+        .detail-title,
+        .activity-name {
+            color: #dce5f4;
+            font-size: 12px;
+            font-weight: 700;
+            margin-bottom: 5px;
+            overflow-wrap: anywhere;
+        }
+
+        .detail-description,
+        .activity-status {
+            color: #929eb4;
+            font-size: 11px;
+            line-height: 1.6;
+            overflow-wrap: anywhere;
+        }
+
+        .detail-item pre {
+            white-space: pre-wrap;
+            overflow-wrap: anywhere;
+            font-size: 10px;
+            line-height: 1.5;
+            color: #b8c7db;
+            margin: 10px 0 0;
+            max-height: 220px;
+            overflow-y: auto;
+            background: #090f1d;
+            padding: 10px;
+            border-radius: 8px;
+        }
+
+        details {
+            margin-top: 10px;
+        }
+
+        details summary {
+            color: #91baff;
+            font-size: 11px;
+            cursor: pointer;
+        }
+
+        /* AGENT ACTIVITY */
+
+        .activity {
+            display: flex;
+            gap: 11px;
+            align-items: flex-start;
+        }
+
+        .activity-icon {
+            color: var(--green);
+            font-size: 16px;
+            flex-shrink: 0;
+            line-height: 1.2;
+        }
+
+        .activity-icon.running {
+            color: var(--yellow);
+        }
+
+        .activity-icon.failed {
+            color: var(--red);
+        }
+
+        /* APPROVAL CARDS */
+
+        .approval-card {
+            background: #17243a;
+            border: 1px solid #3b506e;
+            border-radius: 12px;
+            padding: 15px;
+            min-width: 0;
+        }
+
+        .approval-title {
+            font-size: 13px;
+            font-weight: 750;
+            margin-bottom: 8px;
+        }
+
+        .approval-description {
+            font-size: 11px;
+            color: #aab8cc;
+            line-height: 1.6;
+            white-space: pre-wrap;
+            overflow-wrap: anywhere;
+        }
+
+        .approval-disclosure {
+            margin-top: 12px;
+            padding: 10px;
+            border-radius: 8px;
+            background: #101a2c;
+            color: #a6b3c8;
+            font-size: 10px;
+            line-height: 1.6;
+        }
+
+        .approval-buttons {
+            display: flex;
+            gap: 9px;
+            margin-top: 14px;
+            flex-wrap: wrap;
+        }
+
+        .approve-action {
+            background: #16885e;
+            color: white;
+            padding: 10px 16px;
+            font-size: 11px;
+        }
+
+        .approve-action:hover:not(:disabled) {
+            background: #20a875;
+        }
+
+        .decline-action {
+            background: #344157;
+            color: white;
+            padding: 10px 16px;
+            font-size: 11px;
+        }
+
+        .decline-action:hover:not(:disabled) {
+            background: #485871;
+        }
+
+        .action-status {
+            display: inline-block;
+            padding: 5px 9px;
+            border-radius: 20px;
+            font-size: 10px;
+            font-weight: 700;
+            margin-top: 10px;
+        }
+
+        .action-status.pending {
+            color: #f4bd55;
+            background: #3c321c;
+        }
+
+        .action-status.completed {
+            color: #55dfa8;
+            background: #173a30;
+        }
+
+        .action-status.declined {
+            color: #aab8cc;
+            background: #283347;
+        }
+
+        .action-status.failed,
+        .action-status.expired {
+            color: #ff9999;
+            background: #472a32;
+        }
+
+        /* ACTION PREVIEW CONTENT */
+
+        .preview-label {
+            color: #91a4c0;
+            font-size: 10px;
+            font-weight: 750;
+            letter-spacing: 0.8px;
+            text-transform: uppercase;
+            margin: 14px 0 7px;
+        }
+
+        .preview-list {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-top: 10px;
+            max-height: 320px;
+            overflow-y: auto;
+            padding-right: 4px;
+        }
+
+        .preview-product {
+            padding: 11px;
+            background: #101a2c;
+            border: 1px solid #2b3a55;
+            border-radius: 9px;
+        }
+
+        .preview-product-name {
+            font-size: 12px;
+            font-weight: 700;
+            margin-bottom: 5px;
+            color: #e3ebf8;
+        }
+
+        .preview-product-sku {
+            font-size: 10px;
+            color: #91baff;
+            margin-bottom: 8px;
+        }
+
+        .preview-product-meta {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6px;
+            font-size: 10px;
+            color: #a6b3c8;
+            line-height: 1.5;
+        }
+
+        .preview-message {
+            margin-top: 9px;
+            padding: 13px;
+            background: #0e1728;
+            border: 1px solid #30405a;
+            border-radius: 9px;
+            color: #dce5f4;
+            white-space: pre-wrap;
+            overflow-wrap: anywhere;
+            font-size: 12px;
+            line-height: 1.7;
+        }
+
+        .preview-summary {
+            padding: 12px;
+            background: #101a2c;
+            border: 1px solid #2b3a55;
+            border-radius: 9px;
+            margin-top: 10px;
+        }
+
+        .preview-date {
+            font-size: 18px;
+            font-weight: 750;
+            line-height: 1.4;
+            color: #e6edfa;
+        }
+
+        .preview-date-subtitle {
+            font-size: 11px;
+            color: #91baff;
+            margin-top: 5px;
+        }
+
+        .preview-purpose {
+            margin-top: 12px;
+            font-size: 12px;
+            line-height: 1.6;
+            color: #b5c2d6;
+        }
+
+        /* FOOTER */
+
+        .note {
+            color: #8491a8;
+            font-size: 11px;
+            line-height: 1.7;
+            border-top: 1px solid var(--border);
+            padding-top: 17px;
+        }
+
+
+
+        .followup-note {
+            color: #9eabc0;
+            font-size: 11px;
+            line-height: 1.6;
+            margin: -8px 0 12px;
+        }
+
+        .followup-report {
+            margin-top: 10px;
+            padding: 11px;
+            border-radius: 9px;
+            background: #0e1728;
+            border: 1px solid #30405a;
+        }
+
+        .followup-report li {
+            margin: 6px 0;
+            color: #c4d0e1;
+            font-size: 11px;
+            line-height: 1.5;
+        }
+
+        .test-followup {
+            margin-top: 10px;
+            background: #315b83;
+            color: white;
+            padding: 9px 12px;
+            font-size: 11px;
+        }
+
+        .test-followup:hover:not(:disabled) {
+            background: #3c74a5;
+        }
+
+        /* RESPONSIVE */
+
+        @media (max-width: 850px) {
+            .layout {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 520px) {
+
+            .container {
+                width: 93%;
+                padding-top: 20px;
+            }
+
+            header {
+                align-items: flex-start;
+                flex-direction: column;
+                margin-bottom: 27px;
+            }
+
+            .card {
+                padding: 16px;
+            }
+
+            .metrics {
+                gap: 8px;
+            }
+
+            .metric {
+                padding: 12px 10px;
+            }
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+<div class="container">
+
+    <!-- HEADER -->
+
+    <header>
+
+        <div class="brand">
+            <span class="brand-main">snapdeal.</span>
+            <span class="brand-sub">Virtual KAM</span>
+        </div>
+
+        <div class="status">
+            <span class="dot" id="statusDot"></span>
+            <span id="statusText">Not connected</span>
+        </div>
+
+    </header>
+
+
+    <!-- INTRO -->
+
+    <div class="eyebrow">
+        Seller success · AI voice assistant
+    </div>
+
+    <h1>Seller conversation</h1>
+
+    <p class="subtitle">
+        Aarav helps sellers understand performance drops and
+        discover actionable opportunities through natural conversation.
+    </p>
+
+
+    <!-- MAIN LAYOUT -->
+
+    <div class="layout">
+
+
+        <!-- =====================================
+             LEFT PANEL
+        ====================================== -->
+
+        <section class="card">
+
+            <h2>Live call</h2>
+
+            <!-- Seller profile -->
+
+            <div class="seller">
+
+                <div class="avatar" id="sellerAvatar">R</div>
+
+                <div>
+                    <div class="seller-name" id="sellerName">
+                        Rajesh
+                    </div>
+
+                    <div class="seller-detail" id="sellerStore">
+                        Rajesh Traders · Fashion & Accessories
+                    </div>
+                </div>
+
+            </div>
+
+
+            <!-- Call controls -->
+
+            <div class="call-box">
+
+                <div class="call-icon" id="callIcon">🎙️</div>
+
+                <div class="call-title" id="callTitle">
+                    Ready to connect
+                </div>
+
+                <div class="call-description" id="callDescription">
+                    Start the call to speak with Aarav.
+                </div>
+
+                <div class="controls">
+
+                    <button
+                        class="start"
+                        id="startButton"
+                        onclick="startCall()"
+                    >
+                        Start conversation
+                    </button>
+
+                    <button
+                        class="stop"
+                        id="stopButton"
+                        onclick="endCall()"
+                        disabled
+                    >
+                        End call
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- Transcript -->
+
+            <div class="transcript">
+
+                <h2>Conversation transcript</h2>
+
+                <div
+                    class="transcript-window"
+                    id="transcript"
+                    aria-live="polite"
+                >
+
+                    <div class="empty" id="emptyTranscript">
+                        Your live conversation will appear here.
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =====================================
+             RIGHT PANEL
+        ====================================== -->
+
+        <aside class="card right-panel">
+
+
+            <!-- SELLER OVERVIEW -->
+
+            <section class="panel-section">
+
+                <h2>Seller overview</h2>
+
+                <div class="metrics">
+
+                    <div class="metric">
+
+                        <div class="metric-label">
+                            Sales performance
+                        </div>
+
+                        <div class="metric-value" id="salesValue">
+                            Awaiting data
+                        </div>
+
+                        <div class="metric-note neutral" id="salesNote">
+                            Waiting for seller metrics
+                        </div>
+
+                    </div>
+
+
+                    <div class="metric">
+
+                        <div class="metric-label">
+                            Order performance
+                        </div>
+
+                        <div class="metric-value" id="ordersValue">
+                            Awaiting data
+                        </div>
+
+                        <div class="metric-note neutral" id="ordersNote">
+                            Waiting for seller metrics
+                        </div>
+
+                    </div>
+
+
+                    <div class="metric">
+
+                        <div class="metric-label">
+                            Stock availability
+                        </div>
+
+                        <div class="metric-value" id="stockValue">
+                            Awaiting data
+                        </div>
+
+                        <div class="metric-note neutral" id="stockNote">
+                            Waiting for seller metrics
+                        </div>
+
+                    </div>
+
+
+                    <div class="metric">
+
+                        <div class="metric-label">
+                            Cancellation rate
+                        </div>
+
+                        <div class="metric-value" id="cancellationValue">
+                            Awaiting data
+                        </div>
+
+                        <div class="metric-note neutral" id="cancellationNote">
+                            Waiting for seller metrics
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- LIVE INVESTIGATION -->
+
+            <section class="panel-section">
+
+                <h2>Live investigation</h2>
+
+                <div
+                    class="details-list"
+                    id="investigationList"
+                >
+
+                    <div class="detail-item empty-investigation">
+
+                        <div class="detail-title">
+                            Waiting for diagnosis
+                        </div>
+
+                        <div class="detail-description">
+                            Findings will appear as Aarav investigates
+                            the seller's business.
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- ACTION APPROVALS -->
+
+            <section class="panel-section">
+
+                <h2>Action approvals</h2>
+
+                <div
+                    class="details-list"
+                    id="pendingActions"
+                >
+
+                    <div class="detail-item" id="noPendingActions">
+
+                        <div class="detail-title">
+                            No pending approvals
+                        </div>
+
+                        <div class="detail-description">
+                            Proposed business actions will appear
+                            here for your review.
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- ACTION HISTORY -->
+
+            <section class="panel-section">
+
+                <h2>Action history</h2>
+
+                <div
+                    class="details-list"
+                    id="actionHistory"
+                >
+
+                    <div class="detail-item" id="noActionHistory">
+
+                        <div class="detail-title">
+                            No actions recorded yet
+                        </div>
+
+                        <div class="detail-description">
+                            Approved and declined actions will
+                            appear here.
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+
+
+            <!-- FOLLOW-UP INTELLIGENCE -->
+
+            <section class="panel-section">
+
+                <h2>Follow-up intelligence</h2>
+
+                <div class="followup-note">
+                    Approved follow-ups are saved locally. Use
+                    <strong>Test Follow-up Now</strong> to demonstrate
+                    a simulated recovery analysis immediately.
+                </div>
+
+                <div id="followupList" class="details-list">
+                    <div class="detail-item">
+                        <div class="detail-title">No follow-ups saved</div>
+                        <div class="detail-description">
+                            Approved follow-up requests will appear here.
+                        </div>
+                    </div>
+                </div>
+
+            </section>
+
+            <!-- AGENT ACTIVITY -->
+
+            <section class="panel-section">
+
+                <h2>Agent activity</h2>
+
+                <div
+                    class="activity-list"
+                    id="activityList"
+                >
+
+                    <div class="activity">
+
+                        <div class="activity-icon">○</div>
+
+                        <div>
+
+                            <div class="activity-name">
+                                Waiting for agent
+                            </div>
+
+                            <div class="activity-status">
+                                Business tools have not been called yet.
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- DISCLOSURE -->
+
+            <div class="note">
+
+                Demo environment: seller metrics and SKU data are
+                sample data. Cancellation reason percentages are
+                assumptions, not verified transaction-level records.
+
+                Business actions require seller approval and are
+                mock actions only. No real restock request,
+                WhatsApp message or follow-up booking is created.
+
+                <br><br>
+
+                Use headphones for the best voice experience.
+
+            </div>
+
+        </aside>
+
+    </div>
+
+</div>
+
+
+
+<script>
+
+// ============================================================
+// 1. SESSION STATE
+// ============================================================
+
+let socket = null;
+
+let audioContext = null;
+let micStream = null;
+
+let sourceNode = null;
+let processorNode = null;
+let muteNode = null;
+
+let nextPlayTime = 0;
+
+let activeTranscript = null;
+
+let serverEndedCall = false;
+let endingRequested = false;
+let endAcknowledgementScheduled = false;
+let callStartInProgress = false;
+
+
+// ============================================================
+// 2. STATUS HELPERS
+// ============================================================
+
+function setStatus(message, state = "idle") {
+
+    document.getElementById("statusText").textContent = message;
+
+    const dot = document.getElementById("statusDot");
+
+    dot.classList.remove("live", "warning");
+
+    if (state === "live") {
+        dot.classList.add("live");
+    }
+
+    if (state === "warning") {
+        dot.classList.add("warning");
+    }
+}
+
+
+function setCallDisplay(title, description, icon = "🎙️") {
+
+    document.getElementById("callTitle").textContent = title;
+
+    document.getElementById("callDescription").textContent =
+        description;
+
+    document.getElementById("callIcon").textContent = icon;
+}
+
+
+// ============================================================
+// 3. FORMATTING
+// ============================================================
+
+function formatINR(value) {
+
+    if (
+        value === null ||
+        value === undefined ||
+        !Number.isFinite(Number(value))
+    ) {
+        return "Unavailable";
+    }
+
+    return new Intl.NumberFormat("en-IN", {
+        style: "currency",
+        currency: "INR",
+        maximumFractionDigits: 0
+    }).format(Number(value));
+}
+
+
+function trendDescription(value, label = "vs last month") {
+
+    if (
+        value === null ||
+        value === undefined ||
+        !Number.isFinite(Number(value))
+    ) {
+
+        return {
+            text: "Change unavailable",
+            className: "neutral"
+        };
+    }
+
+    const number = Number(value);
+
+    if (number < 0) {
+
+        return {
+            text: `↓ ${Math.abs(number)}% ${label}`,
+            className: "negative"
+        };
+    }
+
+    if (number > 0) {
+
+        return {
+            text: `↑ ${number}% ${label}`,
+            className: "positive"
+        };
+    }
+
+    return {
+        text: `No change ${label}`,
+        className: "neutral"
+    };
+}
+
+
+function updateMetric(
+    valueId,
+    noteId,
+    value,
+    note,
+    noteClass = "neutral"
+) {
+
+    const valueElement = document.getElementById(valueId);
+    const noteElement = document.getElementById(noteId);
+
+    if (valueElement) {
+        valueElement.textContent = value;
+    }
+
+    if (noteElement) {
+
+        noteElement.textContent = note;
+
+        noteElement.className =
+            `metric-note ${noteClass}`;
+    }
+}
+
+
+// ============================================================
+// 4. KPI DASHBOARD
+// ============================================================
+
+function updateSellerMetrics(data) {
+
+    if (!data) return;
+
+    const sales = data.sales || {};
+    const orders = data.orders || {};
+    const stock = data.stock || {};
+    const cancellations = data.cancellations || {};
+
+    // SALES
+
+    const salesTrend = trendDescription(sales.change_pct);
+
+    updateMetric(
+        "salesValue",
+        "salesNote",
+        formatINR(sales.current),
+        `${salesTrend.text} · Previous: ${formatINR(sales.previous)}`,
+        salesTrend.className
+    );
+
+
+    // ORDERS
+
+    const ordersTrend = trendDescription(orders.change_pct);
+
+    updateMetric(
+        "ordersValue",
+        "ordersNote",
+        orders.current !== undefined
+            ? `${orders.current} orders`
+            : "Unavailable",
+        `${ordersTrend.text} · Previous: ${orders.previous ?? "N/A"}`,
+        ordersTrend.className
+    );
+
+
+    // STOCK
+
+    const currentStock = Number(stock.current);
+    const previousStock = Number(stock.previous);
+
+    const stockDifference = currentStock - previousStock;
+
+    updateMetric(
+        "stockValue",
+        "stockNote",
+        stock.current !== undefined
+            ? `${stock.current} out of stock`
+            : "Unavailable",
+        `Previous: ${stock.previous ?? "N/A"} · Change: ${
+            Number.isFinite(stockDifference)
+                ? (stockDifference > 0 ? "+" : "") + stockDifference
+                : "N/A"
+        }`,
+        stockDifference > 0 ? "negative" : "neutral"
+    );
+
+
+    // CANCELLATIONS
+
+    const currentCancellation =
+        Number(cancellations.current_rate);
+
+    const previousCancellation =
+        Number(cancellations.previous_rate);
+
+    const cancellationDifference =
+        currentCancellation - previousCancellation;
+
+    updateMetric(
+        "cancellationValue",
+        "cancellationNote",
+        cancellations.current_rate !== undefined
+            ? `${cancellations.current_rate}%`
+            : "Unavailable",
+        `Previous: ${cancellations.previous_rate ?? "N/A"}% · ${
+            Number.isFinite(cancellationDifference)
+                ? (cancellationDifference > 0 ? "+" : "") +
+                    cancellationDifference + " percentage points"
+                : "Change unavailable"
+        }`,
+        cancellationDifference > 0 ? "negative" : "neutral"
+    );
+
+
+    // SELLER PROFILE
+
+    if (data.seller) {
+
+        const seller = data.seller;
+
+        if (seller.name) {
+
+            document.getElementById("sellerName").textContent =
+                seller.name;
+
+            document.getElementById("sellerAvatar").textContent =
+                seller.name.charAt(0).toUpperCase();
+        }
+
+        if (seller.store_name || seller.category) {
+
+            document.getElementById("sellerStore").textContent =
+                [
+                    seller.store_name,
+                    seller.category
+                ].filter(Boolean).join(" · ");
+        }
+    }
+
+
+    addInvestigation(
+        "Seller performance retrieved",
+        `Sales ${formatINR(sales.current)}; ` +
+        `${orders.current} orders; ` +
+        `${stock.current} out-of-stock products; ` +
+        `${cancellations.current_rate}% cancellation rate.`
+    );
+
+}
+
+
+// ============================================================
+// 5. INVESTIGATION PANEL
+// ============================================================
+
+function addInvestigation(title, description, rawData = null) {
+
+    const container = document.getElementById("investigationList");
+
+    if (!container) return;
+
+    const item = document.createElement("div");
+
+    item.className = "detail-item";
+
+    const heading = document.createElement("div");
+
+    heading.className = "detail-title";
+    heading.textContent = title;
+
+    const body = document.createElement("div");
+
+    body.className = "detail-description";
+    body.textContent = description;
+
+    item.appendChild(heading);
+    item.appendChild(body);
+
+    if (rawData !== null) {
+
+        const details = document.createElement("details");
+
+        const summary = document.createElement("summary");
+
+        summary.textContent = "View retrieved data";
+
+        const pre = document.createElement("pre");
+
+        pre.textContent = JSON.stringify(rawData, null, 2);
+
+        details.appendChild(summary);
+        details.appendChild(pre);
+
+        item.appendChild(details);
+    }
+
+    const empty = container.querySelector(".empty-investigation");
+
+    if (empty) {
+        empty.remove();
+    }
+
+    container.prepend(item);
+}
+
+
+// ============================================================
+// 6. AGENT ACTIVITY
+// ============================================================
+
+const TOOL_LABELS = {
+
+    "get_seller_metrics":
+        "Retrieve seller metrics",
+
+    "get_out_of_stock_products":
+        "Inspect out-of-stock products",
+
+    "get_cancellation_breakdown":
+        "Analyze cancellation reasons"
+
+};
+
+
+const ACTIVITY_LABELS = {
+
+    "running":
+        "Executing business tool...",
+
+    "completed":
+        "Data retrieved successfully",
+
+    "failed":
+        "Tool execution failed"
+
+};
+
+
+function addActivity(name, status) {
+
+    const list = document.getElementById("activityList");
+
+    const empty = list.querySelector(".activity");
+
+    if (
+        empty &&
+        empty.querySelector(".activity-name") &&
+        empty.querySelector(".activity-name").textContent ===
+        "Waiting for agent"
+    ) {
+        list.innerHTML = "";
+    }
+
+    const id =
+        "activity-" + name.replace(/[^a-zA-Z0-9_-]/g, "-");
+
+    let item = document.getElementById(id);
+
+    if (!item) {
+
+        item = document.createElement("div");
+
+        item.className = "activity";
+        item.id = id;
+
+        const icon = document.createElement("div");
+
+        icon.className = "activity-icon";
+
+        const content = document.createElement("div");
+
+        const heading = document.createElement("div");
+
+        heading.className = "activity-name";
+
+        const message = document.createElement("div");
+
+        message.className = "activity-status";
+
+        content.appendChild(heading);
+        content.appendChild(message);
+
+        item.appendChild(icon);
+        item.appendChild(content);
+
+        list.prepend(item);
+    }
+
+    const icon = item.querySelector(".activity-icon");
+
+    icon.classList.remove("running", "failed");
+
+    if (status === "running") {
+
+        icon.textContent = "◉";
+        icon.classList.add("running");
+
+    } else if (status === "failed") {
+
+        icon.textContent = "!";
+        icon.classList.add("failed");
+
+    } else {
+
+        icon.textContent = "✓";
+    }
+
+    item.querySelector(".activity-name").textContent =
+        TOOL_LABELS[name] || name;
+
+    item.querySelector(".activity-status").textContent =
+        ACTIVITY_LABELS[status] || status;
+}
+
+
+// ============================================================
+// 7. DASHBOARD EVENTS
+// ============================================================
+
+function updateDashboard(event) {
+
+    const data = event.data || {};
+
+    if (event.section === "metrics") {
+
+        updateSellerMetrics(data);
+
+    } else if (event.section === "stock_details") {
+
+        const products = data.products || [];
+
+        addInvestigation(
+            "Out-of-stock product investigation",
+            `${products.length} SKU records retrieved. ` +
+            "Lost-order and revenue figures are estimates.",
+            data
+        );
+
+        const count = products.length;
+
+        updateMetric(
+            "stockValue",
+            "stockNote",
+            document.getElementById("stockValue").textContent,
+            `${count} SKU records inspected · Sample data`,
+            "neutral"
+        );
+
+    } else if (event.section === "cancellation_details") {
+
+        addInvestigation(
+            "Cancellation investigation",
+            "Cancellation reason breakdown retrieved. " +
+            "Reason percentages are sample assumptions, " +
+            "not verified transaction-level records.",
+            data
+        );
+
+        updateMetric(
+            "cancellationValue",
+            "cancellationNote",
+            document.getElementById("cancellationValue").textContent,
+            "Reason breakdown retrieved · Sample assumptions",
+            "neutral"
+        );
+
+    }
+}
+
+
+// ============================================================
+// 8. ACTION APPROVAL PREVIEWS
+// ============================================================
+
+const ACTION_LABELS = {
+
+    "create_restock_task":
+        "Create restock task",
+
+    "send_whatsapp_summary":
+        "Prepare WhatsApp summary",
+
+    "schedule_followup_call":
+        "Schedule follow-up"
+
+};
+
+
+function createElement(tag, className, text = null) {
+
+    const element = document.createElement(tag);
+
+    if (className) {
+        element.className = className;
+    }
+
+    if (text !== null && text !== undefined) {
+        element.textContent = String(text);
+    }
+
+    return element;
+}
+
+
+function appendPreviewDisclosure(card, text) {
+
+    if (!text) return;
+
+    card.appendChild(
+        createElement(
+            "div",
+            "approval-disclosure",
+            text
+        )
+    );
+}
+
+
+// RESTOCK PREVIEW
+
+function renderRestockPreview(preview, container) {
+
+    container.appendChild(
+        createElement(
+            "div",
+            "preview-label",
+            `Priority: ${String(preview.priority || "medium").toUpperCase()}`
+        )
+    );
+
+    const products = preview.products || [];
+    const selectedCount = preview.selected_count ?? products.length;
+    const totalCount = preview.total_out_of_stock ?? selectedCount;
+    const scopeLabel = preview.scope === "all"
+        ? "All unavailable products"
+        : preview.scope === "top_five"
+            ? "Top five priority products"
+            : "Selected products";
+
+    container.appendChild(
+        createElement(
+            "div",
+            "approval-description",
+            `${scopeLabel}: ${selectedCount} of ${totalCount} unavailable products`
+        )
+    );
+
+    if (!products.length) {
+
+        container.appendChild(
+            createElement(
+                "div",
+                "approval-description",
+                "No SKU details were returned."
+            )
+        );
+
+        return;
+    }
+
+    const list = createElement("div", "preview-list");
+
+    products.forEach((product, index) => {
+
+        const card = createElement("div", "preview-product");
+
+        card.appendChild(
+            createElement(
+                "div",
+                "preview-product-name",
+                `${index + 1}. ${product.product_name || "Product name unavailable"}`
+            )
+        );
+
+        card.appendChild(
+            createElement(
+                "div",
+                "preview-product-sku",
+                `SKU: ${product.sku || "Unavailable"}`
+            )
+        );
+
+        const metadata = createElement(
+            "div",
+            "preview-product-meta"
+        );
+
+        metadata.appendChild(
+            createElement(
+                "div",
+                null,
+                `Days out of stock: ${product.days_out_of_stock ?? "Not provided"}`
+            )
+        );
+
+        metadata.appendChild(
+            createElement(
+                "div",
+                null,
+                `Last-month orders: ${product.last_month_orders ?? "Not provided"}`
+            )
+        );
+
+        metadata.appendChild(
+            createElement(
+                "div",
+                null,
+                `Estimated lost orders: ${product.estimated_lost_orders ?? "Not provided"}`
+            )
+        );
+
+        metadata.appendChild(
+            createElement(
+                "div",
+                null,
+                `Estimated lost revenue: ${
+                    product.estimated_lost_revenue !== null &&
+                    product.estimated_lost_revenue !== undefined
+                        ? formatINR(product.estimated_lost_revenue)
+                        : "Not provided"
+                }`
+            )
+        );
+
+        card.appendChild(metadata);
+
+        list.appendChild(card);
+    });
+
+    container.appendChild(list);
+}
+
+
+// WHATSAPP PREVIEW
+
+function renderWhatsAppPreview(preview, container) {
+
+    container.appendChild(
+        createElement(
+            "div",
+            "preview-label",
+            "Exact message for review"
+        )
+    );
+
+    const message = createElement(
+        "div",
+        "preview-message",
+        preview.message || "No message supplied."
+    );
+
+    container.appendChild(message);
+
+    container.appendChild(
+        createElement(
+            "div",
+            "approval-disclosure",
+            "This is the complete proposed message. Approval records a mock action only; it does not send a real WhatsApp message."
+        )
+    );
+}
+
+
+// FOLLOW-UP PREVIEW
+
+function renderFollowupPreview(preview, container) {
+
+    const summary = createElement(
+        "div",
+        "preview-summary"
+    );
+
+    summary.appendChild(
+        createElement(
+            "div",
+            "preview-date",
+            preview.date_label || preview.date_iso || "Date unavailable"
+        )
+    );
+
+    summary.appendChild(
+        createElement(
+            "div",
+            "preview-date-subtitle",
+            `Proposed follow-up · ${preview.days_from_now} day(s) from today`
+        )
+    );
+
+    summary.appendChild(
+        createElement(
+            "div",
+            "preview-purpose",
+            `Purpose: ${preview.purpose || "Not specified"}`
+        )
+    );
+
+    summary.appendChild(
+        createElement(
+            "div",
+            "preview-purpose",
+            `Timezone: ${preview.timezone || "IST"} · Time: ${preview.time_label || "Not specified"}`
+        )
+    );
+
+    container.appendChild(summary);
+
+    container.appendChild(
+        createElement(
+            "div",
+            "approval-disclosure",
+            "This is a mock follow-up record. No real phone call or calendar appointment will be booked."
+        )
+    );
+}
+
+
+// CREATE THE FULL PENDING APPROVAL CARD
+
+function addPendingAction(data) {
+
+    const container = document.getElementById("pendingActions");
+
+    const existing = document.getElementById(
+        "approval-" + data.request_id
+    );
+
+    if (existing) return;
+
+    const empty = document.getElementById("noPendingActions");
+
+    if (empty) {
+        empty.remove();
+    }
+
+    const card = createElement(
+        "div",
+        "approval-card"
+    );
+
+    card.id = "approval-" + data.request_id;
+
+    const title = createElement(
+        "div",
+        "approval-title",
+        data.title || ACTION_LABELS[data.action] || "Business action"
+    );
+
+    const description = createElement(
+        "div",
+        "approval-description",
+        data.description || "Review the proposed action."
+    );
+
+    const preview = data.preview || {};
+
+    const previewContainer = createElement(
+        "div",
+        null
+    );
+
+    if (preview.kind === "restock") {
+
+        renderRestockPreview(preview, previewContainer);
+
+    } else if (preview.kind === "whatsapp") {
+
+        renderWhatsAppPreview(preview, previewContainer);
+
+    } else if (preview.kind === "followup") {
+
+        renderFollowupPreview(preview, previewContainer);
+
+    }
+
+    appendPreviewDisclosure(
+        card,
+        preview.disclosure
+    );
+
+    const status = createElement(
+        "div",
+        "action-status pending",
+        "AWAITING YOUR APPROVAL"
+    );
+
+    status.id = "approval-status-" + data.request_id;
+
+    const buttons = createElement(
+        "div",
+        "approval-buttons"
+    );
+
+    const approve = createElement(
+        "button",
+        "approve-action",
+        "Approve"
+    );
+
+    approve.onclick = () => {
+
+        submitActionDecision(
+            data.request_id,
+            "approve_action",
+            buttons
+        );
+    };
+
+    const decline = createElement(
+        "button",
+        "decline-action",
+        "Decline"
+    );
+
+    decline.onclick = () => {
+
+        submitActionDecision(
+            data.request_id,
+            "reject_action",
+            buttons
+        );
+    };
+
+    buttons.appendChild(approve);
+    buttons.appendChild(decline);
+
+    card.appendChild(title);
+    card.appendChild(description);
+    card.appendChild(previewContainer);
+    card.appendChild(status);
+    card.appendChild(buttons);
+
+    container.prepend(card);
+
+    addInvestigation(
+        "Action awaiting approval",
+        `${title.textContent}. No action has been executed yet.`
+    );
+}
+
+
+// SEND SELLER DECISION TO BACKEND
+
+function submitActionDecision(requestId, decision, buttons) {
+
+    if (
+        !socket ||
+        socket.readyState !== WebSocket.OPEN
+    ) {
+
+        setStatus("Not connected", "warning");
+
+        return;
+    }
+
+    // Prevent duplicate clicks.
+
+    buttons.querySelectorAll("button").forEach(button => {
+
+        button.disabled = true;
+
+    });
+
+    const status = document.getElementById(
+        "approval-status-" + requestId
+    );
+
+    if (status) {
+
+        status.textContent = "SENDING DECISION...";
+
+    }
+
+    socket.send(JSON.stringify({
+
+        type: decision,
+        request_id: requestId
+
+    }));
+
+}
+
+
+// ============================================================
+// 9. ACTION HISTORY
+// ============================================================
+
+function handleActionResult(data) {
+
+    const card = document.getElementById(
+        "approval-" + data.request_id
+    );
+
+    let label = "Unknown status";
+    let className = "expired";
+
+    if (data.status === "completed") {
+
+        label = "COMPLETED — MOCK ACTION";
+        className = "completed";
+
+    } else if (data.status === "declined") {
+
+        label = "DECLINED — NOT EXECUTED";
+        className = "declined";
+
+    } else if (data.status === "failed") {
+
+        label = "EXECUTION FAILED";
+        className = "failed";
+
+    } else if (data.status === "expired") {
+
+        label = "REQUEST EXPIRED";
+        className = "expired";
+    }
+
+    if (card) {
+
+        const status = card.querySelector(".action-status");
+
+        if (status) {
+
+            status.textContent = label;
+            status.className = "action-status " + className;
+        }
+
+        const buttons = card.querySelector(".approval-buttons");
+
+        if (buttons) {
+            buttons.remove();
+        }
+    }
+
+    // Add action result to history.
+
+    const history = document.getElementById("actionHistory");
+
+    const emptyHistory = document.getElementById("noActionHistory");
+
+    if (emptyHistory) {
+        emptyHistory.remove();
+    }
+
+    const historyCard = createElement(
+        "div",
+        "detail-item"
+    );
+
+    const actionTitle =
+        ACTION_LABELS[data.action] ||
+        data.action ||
+        "Business action";
+
+    historyCard.appendChild(
+        createElement(
+            "div",
+            "detail-title",
+            actionTitle
+        )
+    );
+
+    historyCard.appendChild(
+        createElement(
+            "div",
+            "detail-description",
+            data.message || label
+        )
+    );
+
+    const badge = createElement(
+        "div",
+        "action-status " + className,
+        label
+    );
+
+    historyCard.appendChild(badge);
+
+    history.prepend(historyCard);
+
+    if (data.action === "schedule_followup_call" && data.status === "completed") {
+        loadFollowups();
+    }
+
+    if (card) {
+        card.remove();
+    }
+
+    // Restore empty pending state when necessary.
+
+    const pending = document.getElementById("pendingActions");
+
+    if (pending.children.length === 0) {
+
+        const emptyPending = createElement(
+            "div",
+            "detail-item"
+        );
+
+        emptyPending.id = "noPendingActions";
+
+        emptyPending.appendChild(
+            createElement(
+                "div",
+                "detail-title",
+                "No pending approvals"
+            )
+        );
+
+        emptyPending.appendChild(
+            createElement(
+                "div",
+                "detail-description",
+                "All proposed actions have been reviewed."
+            )
+        );
+
+        pending.appendChild(emptyPending);
+    }
+
+    if (data.status === "completed") {
+
+        addInvestigation(
+            "Mock action completed",
+            data.message || "Approved mock action recorded."
+        );
+
+    } else if (data.status === "declined") {
+
+        addInvestigation(
+            "Action declined",
+            "No business action was executed."
+        );
+
+    } else if (data.status === "failed") {
+
+        addInvestigation(
+            "Action execution failed",
+            data.message || "The action could not be completed."
+        );
+
+    }
+
+}
+
+
+// ============================================================
+// 10. TRANSCRIPT
+// ============================================================
+
+function appendTranscript(role, text) {
+
+    if (!text) return;
+
+    const transcript = document.getElementById("transcript");
+
+    const empty = document.getElementById("emptyTranscript");
+
+    if (empty) {
+        empty.remove();
+    }
+
+    if (
+        !activeTranscript ||
+        activeTranscript.dataset.role !== role
+    ) {
+
+        const message = createElement(
+            "div",
+            "message " + role
+        );
+
+        message.dataset.role = role;
+
+        const label = createElement(
+            "div",
+            "message-label",
+            role === "user" ? "You" : "Aarav"
+        );
+
+        const body = createElement(
+            "div",
+            "message-text"
+        );
+
+        message.appendChild(label);
+        message.appendChild(body);
+
+        transcript.appendChild(message);
+
+        activeTranscript = message;
+    }
+
+    activeTranscript.querySelector(
+        ".message-text"
+    ).textContent += text;
+
+    transcript.scrollTop = transcript.scrollHeight;
+}
+
+
+// ============================================================
+// 11. MICROPHONE AUDIO
+// ============================================================
+
+function downsampleTo16k(input, inputRate) {
+
+    const ratio = inputRate / 16000;
+
+    const outputLength = Math.floor(input.length / ratio);
+
+    const output = new Int16Array(outputLength);
+
+    for (let i = 0; i < outputLength; i++) {
+
+        const start = Math.floor(i * ratio);
+
+        const end = Math.min(
+            Math.floor((i + 1) * ratio),
+            input.length
+        );
+
+        let sum = 0;
+
+        for (let j = start; j < end; j++) {
+            sum += input[j];
+        }
+
+        const average = sum / Math.max(1, end - start);
+
+        const sample = Math.max(
+            -1,
+            Math.min(1, average)
+        );
+
+        output[i] = sample < 0
+            ? sample * 32768
+            : sample * 32767;
+    }
+
+    return output;
+}
+
+
+function startMicrophone() {
+
+    if (!audioContext || !micStream) {
+
+        throw new Error(
+            "Microphone or audio context is unavailable."
+        );
+    }
+
+    sourceNode =
+        audioContext.createMediaStreamSource(micStream);
+
+    processorNode =
+        audioContext.createScriptProcessor(4096, 1, 1);
+
+    muteNode = audioContext.createGain();
+
+    muteNode.gain.value = 0;
+
+    processorNode.onaudioprocess = function(event) {
+
+        if (endingRequested) return;
+
+        if (
+            !socket ||
+            socket.readyState !== WebSocket.OPEN
+        ) {
+            return;
+        }
+
+        const input = event.inputBuffer.getChannelData(0);
+
+        const pcm = downsampleTo16k(
+            input,
+            audioContext.sampleRate
+        );
+
+        if (pcm.length > 0) {
+
+            socket.send(pcm.buffer);
+
+        }
+    };
+
+    sourceNode.connect(processorNode);
+
+    processorNode.connect(muteNode);
+
+    muteNode.connect(audioContext.destination);
+}
+
+
+function stopMicrophoneCapture() {
+
+    if (processorNode) {
+
+        processorNode.onaudioprocess = null;
+
+        processorNode.disconnect();
+
+        processorNode = null;
+    }
+
+    if (sourceNode) {
+
+        sourceNode.disconnect();
+
+        sourceNode = null;
+    }
+
+    if (muteNode) {
+
+        muteNode.disconnect();
+
+        muteNode = null;
+    }
+
+    if (micStream) {
+
+        micStream.getTracks().forEach(track => track.stop());
+
+        micStream = null;
+    }
+}
+
+
+// ============================================================
+// 12. GEMINI AUDIO PLAYBACK
+// ============================================================
+
+function playGeminiAudio(arrayBuffer) {
+
+    if (
+        !audioContext ||
+        audioContext.state === "closed"
+    ) {
+        return;
+    }
+
+    const usableBytes =
+        arrayBuffer.byteLength - (arrayBuffer.byteLength % 2);
+
+    if (usableBytes <= 0) return;
+
+    const pcm = new Int16Array(
+        arrayBuffer,
+        0,
+        usableBytes / 2
+    );
+
+    const floatAudio = new Float32Array(pcm.length);
+
+    for (let i = 0; i < pcm.length; i++) {
+
+        floatAudio[i] = pcm[i] / 32768;
+
+    }
+
+    const buffer = audioContext.createBuffer(
+        1,
+        floatAudio.length,
+        24000
+    );
+
+    buffer.copyToChannel(floatAudio, 0);
+
+    const source = audioContext.createBufferSource();
+
+    source.buffer = buffer;
+
+    source.connect(audioContext.destination);
+
+    const now = audioContext.currentTime;
+
+    if (nextPlayTime < now) {
+        nextPlayTime = now + 0.03;
+    }
+
+    source.start(nextPlayTime);
+
+    nextPlayTime += buffer.duration;
+}
+
+
+// ============================================================
+// 13. CALL INITIALIZATION
+// ============================================================
+
+async function startCall() {
+
+    if (callStartInProgress) return;
+
+    callStartInProgress = true;
+
+    const startButton =
+        document.getElementById("startButton");
+
+    const stopButton =
+        document.getElementById("stopButton");
+
+    startButton.disabled = true;
+    stopButton.disabled = true;
+
+    serverEndedCall = false;
+    endingRequested = false;
+    endAcknowledgementScheduled = false;
+
+    activeTranscript = null;
+    nextPlayTime = 0;
+
+    try {
+
+        setStatus("Requesting microphone...", "warning");
+
+        setCallDisplay(
+            "Connecting to Aarav",
+            "Please allow microphone access.",
+            "🎙️"
+        );
+
+        // Request microphone permission.
+
+        micStream = await navigator.mediaDevices.getUserMedia({
+
+            audio: {
+                channelCount: 1,
+                echoCancellation: true,
+                noiseSuppression: true,
+                autoGainControl: true
+            }
+
+        });
+
+        // Create audio context.
+
+        audioContext = new AudioContext({
+            latencyHint: "interactive"
+        });
+
+        await audioContext.resume();
+
+        nextPlayTime = audioContext.currentTime;
+
+        // Open WebSocket.
+
+        const protocol =
+            location.protocol === "https:" ? "wss:" : "ws:";
+
+        const wsUrl =
+            protocol + "//" + location.host + "/ws";
+
+        socket = new WebSocket(wsUrl);
+
+        socket.binaryType = "arraybuffer";
+
+
+        // -----------------------------------------
+        // SOCKET OPEN
+        // -----------------------------------------
+
+        socket.onopen = function() {
+
+            setStatus("Connected to Aarav", "live");
+
+            setCallDisplay(
+                "Conversation in progress",
+                "Speak naturally. Aarav is listening.",
+                "🎙️"
+            );
+
+            stopButton.disabled = false;
+
+            callStartInProgress = false;
+
+            startMicrophone();
+
+        };
+
+
+        // -----------------------------------------
+        // SOCKET MESSAGES
+        // -----------------------------------------
+
+        socket.onmessage = function(event) {
+
+            // Binary messages are audio.
+
+            if (event.data instanceof ArrayBuffer) {
+
+                playGeminiAudio(event.data);
+
+                return;
+            }
+
+            if (typeof event.data !== "string") return;
+
+            let data;
+
+            try {
+
+                data = JSON.parse(event.data);
+
+            } catch (error) {
+
+                console.error(
+                    "Invalid backend JSON:",
+                    error
+                );
+
+                return;
+            }
+
+
+            // CONNECTION STATUS
+
+            if (data.type === "status") {
+
+                setStatus(data.message, "live");
+
+            }
+
+
+            // SELLER TRANSCRIPT
+
+            else if (data.type === "user_transcript") {
+
+                appendTranscript("user", data.text);
+
+            }
+
+
+            // AARAV TRANSCRIPT
+
+            else if (data.type === "assistant_transcript") {
+
+                appendTranscript("assistant", data.text);
+
+            }
+
+
+            // TOOL ACTIVITY
+
+            else if (data.type === "tool_activity") {
+
+                addActivity(data.name, data.status);
+
+            }
+
+
+            // KPI AND INVESTIGATION DATA
+
+            else if (data.type === "dashboard_update") {
+
+                updateDashboard(data);
+
+            }
+
+
+            // ACTION PREVIEW
+
+            else if (data.type === "pending_action") {
+
+                addPendingAction(data);
+
+            }
+
+
+            // ACTION EXECUTION RESULT
+
+            else if (data.type === "action_result") {
+
+                handleActionResult(data);
+
+            }
+
+
+            // TURN COMPLETE
+
+            else if (data.type === "turn_complete") {
+
+                activeTranscript = null;
+
+            }
+
+
+            // CALL TERMINATION STARTED
+
+            else if (data.type === "call_ending") {
+
+                endingRequested = true;
+
+                stopButton.disabled = true;
+
+                stopMicrophoneCapture();
+
+                setStatus("Ending call...", "warning");
+
+                setCallDisplay(
+                    "Ending conversation",
+                    "Aarav is giving the final summary.",
+                    "👋"
+                );
+
+            }
+
+
+            // CALL TERMINATION COMPLETED
+
+            else if (data.type === "call_ended") {
+
+                serverEndedCall = true;
+
+                endingRequested = true;
+
+                stopMicrophoneCapture();
+
+                setStatus("Finishing call...", "warning");
+
+                setCallDisplay(
+                    "Finishing conversation",
+                    "Please wait while the farewell finishes.",
+                    "👋"
+                );
+
+                scheduleEndAcknowledgement();
+
+            }
+
+
+            // BACKEND ERROR
+
+            else if (data.type === "error") {
+
+                console.error(
+                    "Backend error:",
+                    data.message
+                );
+
+                setStatus("Agent error", "warning");
+
+                setCallDisplay(
+                    "Something went wrong",
+                    data.message || "Check the backend terminal.",
+                    "⚠️"
+                );
+
+            }
+
+        };
+
+
+        // -----------------------------------------
+        // SOCKET ERROR
+        // -----------------------------------------
+
+        socket.onerror = function(error) {
+
+            console.error("WebSocket error:", error);
+
+            setStatus("Connection error", "warning");
+
+            setCallDisplay(
+                "Connection error",
+                "Please check the backend terminal.",
+                "⚠️"
+            );
+
+        };
+
+
+        // -----------------------------------------
+        // SOCKET CLOSED
+        // -----------------------------------------
+
+        socket.onclose = function(event) {
+
+            stopAudio();
+
+            callStartInProgress = false;
+
+            if (serverEndedCall) {
+
+                setStatus("Call ended");
+
+                setCallDisplay(
+                    "Call ended",
+                    "The conversation has been successfully completed.",
+                    "✓"
+                );
+
+            } else {
+
+                setStatus("Call disconnected");
+
+                setCallDisplay(
+                    "Call disconnected",
+                    "Start another conversation when ready.",
+                    "🎙️"
+                );
+
+            }
+
+            startButton.disabled = false;
+            stopButton.disabled = true;
+
+            console.log(
+                "WebSocket closed:",
+                event.code,
+                event.reason
+            );
+
+        };
+
+
+    } catch (error) {
+
+        console.error(
+            "Unable to start call:",
+            error
+        );
+
+        stopAudio();
+
+        callStartInProgress = false;
+
+        setStatus("Unable to start", "warning");
+
+        setCallDisplay(
+            "Could not start conversation",
+            error.message || "Check microphone permissions.",
+            "⚠️"
+        );
+
+        startButton.disabled = false;
+        stopButton.disabled = true;
+
+    }
+
+}
+
+
+// ============================================================
+// 14. CALL END ACKNOWLEDGEMENT
+// ============================================================
+
+function scheduleEndAcknowledgement() {
+
+    if (endAcknowledgementScheduled) return;
+
+    endAcknowledgementScheduled = true;
+
+    const remainingAudio = audioContext
+        ? Math.max(
+            0,
+            (nextPlayTime - audioContext.currentTime) * 1000
+        )
+        : 0;
+
+    const delay = Math.min(
+        11000,
+        remainingAudio + 400
+    );
+
+    window.setTimeout(() => {
+
+        if (
+            socket &&
+            socket.readyState === WebSocket.OPEN
+        ) {
+
+            socket.send(JSON.stringify({
+                type: "call_ended_ack"
+            }));
+
+        }
+
+    }, delay);
+
+}
+
+
+// ============================================================
+// 15. MANUAL CALL TERMINATION
+// ============================================================
+
+function endCall() {
+
+    endingRequested = true;
+    serverEndedCall = false;
+
+    stopMicrophoneCapture();
+
+    if (socket) {
+
+        if (
+            socket.readyState === WebSocket.OPEN ||
+            socket.readyState === WebSocket.CONNECTING
+        ) {
+
+            socket.close(
+                1000,
+                "Call ended manually by seller"
+            );
+
+        }
+
+        socket = null;
+    }
+
+    stopAudio();
+
+    document.getElementById("startButton").disabled = false;
+    document.getElementById("stopButton").disabled = true;
+
+    setStatus("Call ended");
+
+    setCallDisplay(
+        "Call ended",
+        "You can start another conversation whenever you are ready.",
+        "✓"
+    );
+
+}
+
+
+// ============================================================
+// 16. AUDIO CLEANUP
+// ============================================================
+
+function stopAudio() {
+
+    stopMicrophoneCapture();
+
+    if (
+        audioContext &&
+        audioContext.state !== "closed"
+    ) {
+
+        const context = audioContext;
+
+        audioContext = null;
+
+        context.close().catch(error => {
+
+            console.warn(
+                "Audio cleanup warning:",
+                error
+            );
+
+        });
+
+    }
+
+    nextPlayTime = 0;
+
+}
+
+
+
+// ============================================================
+// FOLLOW-UP INTELLIGENCE
+// ============================================================
+
+async function loadFollowups() {
+    const container = document.getElementById("followupList");
+    if (!container) return;
+
+    try {
+        const response = await fetch("/api/followups");
+        if (!response.ok) throw new Error("Could not load follow-ups");
+        const payload = await response.json();
+        renderFollowups(payload.followups || []);
+    } catch (error) {
+        console.warn("Follow-up list unavailable:", error);
+    }
+}
+
+function renderFollowups(items) {
+    const container = document.getElementById("followupList");
+    if (!container) return;
+    container.innerHTML = "";
+
+    if (!items.length) {
+        const empty = createElement("div", "detail-item");
+        empty.appendChild(createElement("div", "detail-title", "No follow-ups saved"));
+        empty.appendChild(createElement("div", "detail-description",
+            "Approve a follow-up request during a call to save it here."));
+        container.appendChild(empty);
+        return;
+    }
+
+    items.forEach(item => {
+        const card = createElement("div", "detail-item");
+        card.appendChild(createElement("div", "detail-title",
+            `${item.id} · ${String(item.status).toUpperCase()}`));
+
+        const due = new Date(item.due_at);
+        card.appendChild(createElement("div", "detail-description",
+            `Due: ${due.toLocaleString("en-IN", { dateStyle: "medium", timeStyle: "short" })} · ${item.days_from_now} day(s)`));
+        card.appendChild(createElement("div", "detail-description",
+            `Purpose: ${item.purpose}`));
+
+        if (item.status === "scheduled" || item.status === "due") {
+            const button = createElement("button", "test-followup",
+                "Test Follow-up Now");
+            button.onclick = () => runFollowupNow(item.id, button);
+            card.appendChild(button);
+        }
+
+        if (item.report) {
+            const report = createElement("div", "followup-report");
+            report.appendChild(createElement("div", "detail-title",
+                "Recovery analysis · SIMULATED DEMO DATA"));
+            report.appendChild(createElement("div", "detail-description",
+                item.report.disclaimer));
+
+            const findings = document.createElement("ul");
+            (item.report.findings || []).forEach(line => {
+                findings.appendChild(createElement("li", null, line));
+            });
+            report.appendChild(findings);
+
+            report.appendChild(createElement("div", "detail-title",
+                "Recommended next steps"));
+
+            const recommendations = document.createElement("ul");
+            (item.report.recommendations || []).forEach(line => {
+                recommendations.appendChild(createElement("li", null, line));
+            });
+            report.appendChild(recommendations);
+            card.appendChild(report);
+        }
+
+        container.appendChild(card);
+    });
+}
+
+async function runFollowupNow(id, button) {
+    if (!confirm(
+        "Run a simulated follow-up analysis now? This uses demo recovery metrics, not live Snapdeal data."
+    )) return;
+
+    button.disabled = true;
+    button.textContent = "Generating report...";
+
+    try {
+        const response = await fetch(
+            `/api/followups/${encodeURIComponent(id)}/test-now`,
+            { method: "POST" }
+        );
+
+        const payload = await response.json();
+
+        if (!response.ok) {
+            throw new Error(payload.error || "Follow-up analysis failed");
+        }
+
+        renderFollowups((await (await fetch("/api/followups")).json()).followups || []);
+        addInvestigation(
+            "Follow-up analysis generated",
+            "A simulated recovery report is available in Follow-up Intelligence. It is not live seller data."
+        );
+    } catch (error) {
+        button.disabled = false;
+        button.textContent = "Test Follow-up Now";
+        alert(error.message);
+    }
+}
+
+// ============================================================
+// 17. INITIAL PAGE STATE
+// ============================================================
+
+document.addEventListener("DOMContentLoaded", function() {
+
+    loadFollowups();
+    setStatus("Not connected");
+
+    setCallDisplay(
+        "Ready to connect",
+        "Start the call to speak with Aarav.",
+        "🎙️"
+    );
+
+});
+
+</script>
+
+</body>
+
+</html>
